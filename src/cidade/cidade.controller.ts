@@ -1,4 +1,4 @@
-import { Get, Post } from '@nestjs/common';
+import { Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Body } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { Cidade } from './cidade.entiy';
@@ -24,6 +24,7 @@ export class CidadeController {
   }
 
   @Post()
+  @UsePipes(ValidationPipe)
   createCliente(@Body() createCidadeDTO: CreateCidadeDTO): Promise<Cidade> {
     return this.cidadeService.createCidade(createCidadeDTO);
   }

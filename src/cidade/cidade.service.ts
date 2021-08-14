@@ -43,6 +43,10 @@ export class CidadeService {
   }
 
   async createCidade(createCidadeDTO: CreateCidadeDTO): Promise<Cidade> {
-    return await this.cidadeRepository.createCidade(createCidadeDTO);
+    try {
+      return await this.cidadeRepository.createCidade(createCidadeDTO);
+    } catch (error) {
+      this.logger.error(`Failed to create cidade,  error ${error}`);
+    }
   }
 }

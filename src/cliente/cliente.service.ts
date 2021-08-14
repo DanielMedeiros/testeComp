@@ -42,7 +42,11 @@ export class ClienteService {
   }
 
   async createCliente(createClienteDTO: CreateClienteDTO): Promise<Cliente> {
-    return await this.clienteRepository.createCliente(createClienteDTO);
+    try {
+      return await this.clienteRepository.createCliente(createClienteDTO);
+    } catch (error) {
+      this.logger.error(`Failed to create client,  error ${error}`);
+    }
   }
 
   async deleteCliente(id: string): Promise<void> {

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
-
+import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { SexoCliente } from '../sexo-cliente.enum';
 export class CreateClienteDTO {
   @ApiProperty({
     description: 'Nome do Cliente',
@@ -13,11 +13,12 @@ export class CreateClienteDTO {
 
   @ApiProperty({
     description: 'Sexo do Cliente',
-    example: 'Masculino',
-    type: 'string',
+    example: 'M',
+    enum: Object.keys(SexoCliente),
   })
   @IsNotEmpty()
   @IsString()
+  @IsEnum(SexoCliente)
   sexo: string;
 
   @ApiProperty({

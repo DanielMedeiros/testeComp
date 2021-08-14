@@ -1,3 +1,5 @@
+import { ValidationPipe } from '@nestjs/common';
+import { UsePipes } from '@nestjs/common';
 import {
   Body,
   Controller,
@@ -36,6 +38,7 @@ export class ClienteController {
   }
 
   @Post()
+  @UsePipes(ValidationPipe)
   createCliente(@Body() createClienteDTO: CreateClienteDTO): Promise<Cliente> {
     return this.clienteService.createCliente(createClienteDTO);
   }
@@ -46,6 +49,7 @@ export class ClienteController {
   }
 
   @Patch('/:id/nome')
+  @UsePipes(ValidationPipe)
   updateClienteName(
     @Param('id') id: string,
     @Body() updateClienteNameDto: UpdateClienteNameDto,
